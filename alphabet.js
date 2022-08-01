@@ -37,7 +37,7 @@ const convert = function () {
   let sumOfNumbers = 0;
   if (input.length == 0) {
     outputArea1.innerHTML = "";
-    return alert("Enter something");
+    return alert("Input should not be empty");
   }
 
   // if the input is a number calculate the sum of the numbers
@@ -45,9 +45,9 @@ const convert = function () {
     let intArr = Array.from(String(input), Number);
     sumOfNumbers = intArr.reduce((a, b) => a + b);
     outputArea1.innerHTML = sumOfNumbers;
-  } else if (input.match(/[a - z]/g) && !input.match(/[0-9]/g)) {
+  } else if (input.match(/[a - zA-Z]/g) && !input.match(/[0-9]/g)) {
     // if the input is a string change that alphabets to numbers that assigned
-    let char = input.split("");
+    let char = input.toLowerCase().split("");
     for (let i = 0; i < char.length; i++) {
       total += alphabet[char[i]];
     }
