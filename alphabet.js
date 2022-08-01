@@ -1,6 +1,7 @@
 const textInput = document.querySelector(".inputText");
 const convertBtn = document.querySelector(".convert__btn");
-const outputArea = document.querySelector(".show__result");
+const outputArea1 = document.querySelector(".num__result");
+const outputArea2 = document.querySelector(".sum-of-num__result");
 
 const alphabet = {
   a: 1,
@@ -32,16 +33,28 @@ const alphabet = {
 };
 
 const convert = function () {
-  const str = textInput.value;
-  if (typeof str === "number") return;
-  let char = str.split("");
+  const input = textInput.value;
   let total = 0;
-  for (let i = 0; i < char.length; i++) {
-    total += alphabet[char[i]];
+  let sumOfNumbers = 0;
+
+  // if the input is a number calculate the sum of the numbers
+  if (!isNaN(input)) {
+    let intArr = Array.from(String(input), Number);
+    sumOfNumbers = intArr.reduce((a, b) => a + b);
+    outputArea2.innerHTML = sumOfNumbers;
+    outputArea1.innerHTML = "";
+  } else {
+    // if the input is a string change that alphabets to numbers that assigned
+    let char = input.split("");
+    for (let i = 0; i < char.length; i++) {
+      total += alphabet[char[i]];
+    }
+    outputArea1.innerHTML = total;
+    outputArea2.innerHTML = "";
   }
-  outputArea.innerHTML = total;
 };
 
+// EVENT LISTENERS
 convertBtn.addEventListener("click", convert);
 document.addEventListener("keydown", function (e) {
   if (e.key === "Enter") {
