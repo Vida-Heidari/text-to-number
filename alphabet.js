@@ -1,7 +1,6 @@
 const textInput = document.querySelector(".inputText");
 const convertBtn = document.querySelector(".convert__btn");
 const outputArea1 = document.querySelector(".num__result");
-const outputArea2 = document.querySelector(".sum-of-num__result");
 
 const alphabet = {
   a: 1,
@@ -36,21 +35,25 @@ const convert = function () {
   const input = textInput.value;
   let total = 0;
   let sumOfNumbers = 0;
+  if (input.length == 0) {
+    outputArea1.innerHTML = "";
+    return alert("Enter something");
+  }
 
   // if the input is a number calculate the sum of the numbers
   if (!isNaN(input)) {
     let intArr = Array.from(String(input), Number);
     sumOfNumbers = intArr.reduce((a, b) => a + b);
-    outputArea2.innerHTML = sumOfNumbers;
-    outputArea1.innerHTML = "";
-  } else {
+    outputArea1.innerHTML = sumOfNumbers;
+  } else if (input.match(/[a - z]/g) && !input.match(/[0-9]/g)) {
     // if the input is a string change that alphabets to numbers that assigned
     let char = input.split("");
     for (let i = 0; i < char.length; i++) {
       total += alphabet[char[i]];
     }
     outputArea1.innerHTML = total;
-    outputArea2.innerHTML = "";
+  } else {
+    outputArea1.innerHTML = 0;
   }
 };
 
