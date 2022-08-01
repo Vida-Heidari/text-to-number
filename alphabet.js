@@ -1,6 +1,6 @@
 const textInput = document.querySelector(".inputText");
 const convertBtn = document.querySelector(".convert__btn");
-const outputArea1 = document.querySelector(".num__result");
+const outputArea = document.querySelector(".num__result");
 
 const alphabet = {
   a: 1,
@@ -34,27 +34,25 @@ const alphabet = {
 const convert = function () {
   const input = textInput.value;
   let total = 0;
-  let sumOfNumbers = 0;
   if (input.length == 0) {
-    outputArea1.innerHTML = "";
+    outputArea.innerHTML = "";
     return alert("Input should not be empty");
   }
 
   // if the input is a number calculate the sum of the numbers
   if (!isNaN(input)) {
     let intArr = Array.from(String(input), Number);
-    sumOfNumbers = intArr.reduce((a, b) => a + b);
-    outputArea1.innerHTML = sumOfNumbers;
-  } else if (input.match(/[a - zA-Z]/g) && !input.match(/[0-9]/g)) {
+    total = intArr.reduce((a, b) => a + b);
+  } else if (input.match(/[a-zA-Z]/g) && !input.match(/[0-9]/g)) {
     // if the input is a string change that alphabets to numbers that assigned
     let char = input.toLowerCase().split("");
     for (let i = 0; i < char.length; i++) {
       total += alphabet[char[i]];
     }
-    outputArea1.innerHTML = total;
   } else {
-    outputArea1.innerHTML = 0;
+    outputArea.innerHTML = 0;
   }
+  outputArea.innerHTML = total;
 };
 
 // EVENT LISTENERS
